@@ -1,13 +1,15 @@
+package linkedList
+
 import java.lang.Exception
 
-class LinkedList<T> {
+open class LinkedList<T> {
     private var _first: Link<T>? = null
 
     fun getFirst(): Link<T>? {
         return _first
     }
 
-    fun setFirst(link: Link<T>?) {
+    open fun setFirst(link: Link<T>?) {
         this._first = link
     }
 
@@ -73,7 +75,7 @@ class LinkedList<T> {
         setFirst(newLink)
     }
 
-    fun insertAfter(value: T, test: (Link<T>) -> Boolean): Boolean {
+    open fun insertAfter(value: T, test: (Link<T>) -> Boolean): Boolean {
 
         val link = find(test) ?: return false
 
@@ -83,7 +85,7 @@ class LinkedList<T> {
 
     }
 
-    fun deleteFirst(): T? {
+    open fun deleteFirst(): T? {
         if (isEmpty()) return null
 
         val link = getFirst()
@@ -93,7 +95,7 @@ class LinkedList<T> {
         return link.getData()
     }
 
-    fun delete(test: (Link<T>) -> Boolean): T? {
+    open fun delete(test: (Link<T>) -> Boolean): T? {
 
         if (isEmpty()) throw Exception("LinkedList is empty")
         // We need keep track of the previous value to be tested in order to modify the linked list with
@@ -111,6 +113,10 @@ class LinkedList<T> {
             previous = link
         }
         return null
+    }
+
+    override fun toString(): String {
+        return "LinkedList(_first=$_first)"
     }
 }
 

@@ -1,3 +1,4 @@
+import linkedList.Link
 import org.junit.jupiter.api.Assertions.*
 
 class LinkTest {

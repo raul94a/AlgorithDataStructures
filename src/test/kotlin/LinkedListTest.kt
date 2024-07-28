@@ -1,3 +1,5 @@
+import linkedList.Link
+import linkedList.LinkedList
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

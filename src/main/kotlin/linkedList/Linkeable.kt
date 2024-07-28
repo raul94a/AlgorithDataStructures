@@ -1,3 +1,5 @@
+package linkedList
+
 interface Linkeable<T> {
 
     fun getData(): T

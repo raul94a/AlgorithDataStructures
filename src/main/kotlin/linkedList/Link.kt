@@ -1,3 +1,5 @@
+package linkedList
+
 class Link<T>(
     private var data: T,
     private var next: Linkeable<T>? = null
@@ -24,7 +26,7 @@ class Link<T>(
     }
 
     override fun toString(): String {
-        return "Link(data=$data, Link: $next)"
+        return "Link(data=$data, linkedList.Link: $next)"
     }
 
 }
