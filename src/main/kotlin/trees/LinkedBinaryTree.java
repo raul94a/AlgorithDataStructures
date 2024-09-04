@@ -376,4 +376,29 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         preorderDrawing(root, 0);
     }
 
+    // inOrder Algorithm
+
+    private void inOrderSubtree(Node<E> p, List<E> snapshot) {
+
+        if (p.getLeft() != null) {
+            inOrderSubtree(p.getLeft(), snapshot);
+        }
+        snapshot.add(p.getElement());
+        if (p.getRight() != null) {
+            inOrderSubtree(p.getRight(), snapshot);
+        }
+    }
+
+    private Iterable<E> inOrder() {
+        var snapshot = new ArrayList<E>();
+        if (!isEmpty()) {
+            inOrderSubtree(root, snapshot);
+        }
+        return snapshot;
+    }
+
+    public Iterable<E> inOrderPositions() {
+        return inOrder();
+    }
+
 }
