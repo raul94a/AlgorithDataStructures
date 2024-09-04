@@ -304,27 +304,65 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             preorderParanthetic(pos, depth + 1);
         }
         var closeElement = " ".repeat(depth * 2) + ")";
-        if(isRoot || hasChildren){
+        if (isRoot || hasChildren) {
             System.out.println(closeElement);
         }
 
 
     }
 
+    private int inOrderLeftDepth(Node<E> node, int depth) {
+        if (node.getLeft() != null) {
+
+            depth = inOrderLeftDepth(node.getLeft(), depth + 1);
+        }
+
+        return depth;
+
+    }
+
     private void preorderDrawing(Node<E> p, int depth) {
+        int leftDepth = inOrderLeftDepth(p, depth);
+        final int HORIZONTAL_BRANCH_LENGTH = 5;
+        final int VERTICAL_BRANCH_LENGTH = 1;
         // vamos a usar el preorder alg
         var children = children(p);
         var isRoot = isRoot(p);
         var hasChildren = this.children(p).iterator().hasNext();
-        // 1. Pintamos el elemento
-        System.out.println(p.getElement());
-        for (int i = 0; i < 3;i++) System.out.println("|");
-        if(p.getRight() != null){
-            System.out.print("-".repeat(5));
+
+        // Colocamos el elemento raiz
+        if (isRoot) {
+            final int horizontalGap = leftDepth * HORIZONTAL_BRANCH_LENGTH;
+            System.out.println(" ".repeat(horizontalGap) + p.getElement());
+            for (int i = 0; i < VERTICAL_BRANCH_LENGTH; i++) {
+                System.out.println(" ".repeat(horizontalGap) + "|");
+            }
+
         }
-        if(p.getLeft() != null){
-            System.out.print(" " + "-".repeat(5));
+        final int leftGap = (leftDepth - depth - 1) * HORIZONTAL_BRANCH_LENGTH;
+        final String leftGapSpaces = leftGap > 0 ? " ".repeat(leftGap) : "";
+        if (p.getLeft() != null) {
+            System.out.print(leftGapSpaces + "-".repeat((HORIZONTAL_BRANCH_LENGTH)));
+
         }
+        if (p.getRight() != null) {
+            System.out.print(" " + "-".repeat((HORIZONTAL_BRANCH_LENGTH)));
+        }
+        final Node<E> leftElement = p.getLeft();
+        final Node<E> rightElement = p.getRight();
+        final boolean isLeftNull = leftElement == null;
+        final boolean isRightNull = rightElement == null;
+        System.out.println();
+
+        final String verticalBranches = leftGapSpaces + (isLeftNull ? " " : "|") + " ".repeat(HORIZONTAL_BRANCH_LENGTH * 2 - 1) + (isRightNull ? " " : "|");
+        System.out.println(verticalBranches);
+        final String verticalBranchesValues = leftGapSpaces +
+                (isLeftNull ? " " : leftElement.getElement()) +
+                " ".repeat(HORIZONTAL_BRANCH_LENGTH * 2 - 1) +
+                (isRightNull ? " " : rightElement.getElement()
+                );
+        System.out.println(verticalBranchesValues);
+
 
         // 2. Para cada hijo, llamamos a printParanthethic
         for (Position<E> pos : children) {
@@ -332,12 +370,10 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
 
 
-
-
     }
 
-    public  void printDraw(){
-        preorderDrawing(root,0);
+    public void printDraw() {
+        preorderDrawing(root, 0);
     }
 
 }
