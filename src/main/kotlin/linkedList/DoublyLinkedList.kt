@@ -2,38 +2,50 @@ package linkedList
 
 import java.lang.Exception
 
-open class LinkedList<T> {
-    private var _first: Linkeable<T>? = null
+open class DoublyLinkedList<T> : LinkedList<T>(){
+   private var _first: Link<T>? = null
+    private var _last: Link<T>? = null
 
-    open fun getFirst(): Linkeable<T>? {
+    override fun getFirst(): Link<T>? {
         return _first
     }
 
-    open fun setFirst(link: Linkeable<T>?) {
-        this._first = link
+     fun setFirst(link: Link<T>?) {
+         _first = link
+         if (_last == null){
+             _last = link
+         }
     }
 
-    open fun getNext(): Linkeable<T>? {
+    fun setLast(link: Link<T>?){
+        _last = link
+        if(_first == null){
+            _first = link
+        }
+    }
+
+    override fun getNext(): Link<T>? {
         return this.getFirst()
     }
 
-    open fun setNext(link: Linkeable<T>?) {
+    fun setNext(link: Link<T>?) {
+
         return this.setFirst(link)
     }
 
 
-    open fun isEmpty(): Boolean {
+    override fun isEmpty(): Boolean {
         return this.getFirst() == null
     }
 
-    open fun first(): T {
+    override fun first(): T {
         if (isEmpty()) {
             throw Exception("LinkedList is empty")
         }
         return getFirst()!!.getData()
     }
 
-    open fun transverse(callback: (Linkeable<T>) -> Unit) {
+    override fun transverse(callback: (Linkeable<T>) -> Unit) {
         var link: Linkeable<T>? = getFirst()
         while (link != null) {
             callback(link)
@@ -41,7 +53,7 @@ open class LinkedList<T> {
         }
     }
 
-    open fun length(): Int {
+    override fun length(): Int {
         var length = 0
         var link: Linkeable<T>? = getFirst()
         while (link != null) {
@@ -54,28 +66,40 @@ open class LinkedList<T> {
     }
 
     // Implementation of find, search, insert, insertAfter
-    open fun find(test: (Linkeable<T>) -> Boolean): Linkeable<T>? {
+    override fun find(test: (Linkeable<T>) -> Boolean): Linkeable<T>? {
         var link: Linkeable<T>? = getFirst()
         while (link != null) {
             if (test(link)) return link
-            link = link.getNext() as Linkeable<T>?
+            link = link.getNext() as Link<T>?
         }
 
         return null
 
     }
 
-    open fun search(test: (Linkeable<T>) -> Boolean): T? {
+    override fun search(test: (Linkeable<T>) -> Boolean): T? {
         return find(test)?.getData()
     }
 
-    open fun insert(value: T) {
+    override fun insert(value: T) {
         val previousLink = getFirst()
         val newLink = Link(value, previousLink)
         setFirst(newLink)
     }
 
-    open fun insertAfter(value: T, test: (Linkeable<T>) -> Boolean): Boolean {
+    fun insertFirst(value: T) {
+        val previousLink = getFirst()
+
+        if(isEmpty()){
+            _first = Link(value,null)
+
+        }
+        else {
+           // getFirst().setPrevious()
+        }
+    }
+
+    override fun insertAfter(value: T, test: (Linkeable<T>) -> Boolean): Boolean {
 
         val link = find(test) ?: return false
 
@@ -85,17 +109,17 @@ open class LinkedList<T> {
 
     }
 
-    open fun deleteFirst(): T? {
+    override fun deleteFirst(): T? {
         if (isEmpty()) return null
 
         val link = getFirst()
         val newLink = link?.getNext()
-        setFirst(newLink as Linkeable<T>)
+        setFirst(newLink as Link<T>)
 
         return link.getData()
     }
 
-    open fun delete(test: (Linkeable<T>) -> Boolean): T? {
+    override fun delete(test: (Linkeable<T>) -> Boolean): T? {
 
         if (isEmpty()) throw Exception("LinkedList is empty")
         // We need keep track of the previous value to be tested in order to modify the linked list with
@@ -104,10 +128,10 @@ open class LinkedList<T> {
 
         while (previous?.getNext() != null) {
             // current item to be tested
-            val link = previous.getNext() as Linkeable<T>
+            val link = previous.getNext() as Link<T>
             if (test(link)) {
                 // In this case we need to set the next value of the previous item to the correct link
-                previous.setNext(link.getNext() as Linkeable<T>?)
+                previous.setNext(link.getNext() as Link<T>?)
                 return link.getData()
             }
             previous = link
@@ -116,9 +140,18 @@ open class LinkedList<T> {
     }
 
     override fun toString(): String {
-        return "LinkedList(_first=$_first)"
+        return "LinkedList(_Link=$_first)"
     }
 }
 
+fun main() {
+    val doublylinked = LinkedList<Int>()
 
+    doublylinked.setFirst(Link(1))
 
+    println(doublylinked)
+
+    doublylinked.setNext(Link(2))
+
+    println(doublylinked)
+}

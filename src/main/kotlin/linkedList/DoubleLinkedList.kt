@@ -3,9 +3,9 @@ package linkedList
 import java.lang.Exception
 
 class DoubleLinkedList<T> : LinkedList<T>() {
-    private var _last: Link<T>? = null
+    private var _last: Linkeable<T>? = null
 
-    fun getLast(): Link<T>? {
+    fun getLast(): Linkeable<T>? {
         return _last
     }
 
@@ -14,7 +14,7 @@ class DoubleLinkedList<T> : LinkedList<T>() {
         return _last!!.getData()
     }
 
-    override fun setFirst(link: Link<T>?) {
+    override fun setFirst(link: Linkeable<T>?) {
         super.setFirst(link)
         if (getLast() == null) _last = link
     }
@@ -33,22 +33,22 @@ class DoubleLinkedList<T> : LinkedList<T>() {
         return "DoubleLinkedList(${super.toString()} _last=$_last)"
     }
 
-    override fun delete(test: (Link<T>) -> Boolean): T? {
+    override fun delete(test: (Linkeable<T>) -> Boolean): T? {
 
         if (isEmpty()) throw Exception("LinkedList is empty")
         // We need keep track of the previous value to be tested in order to modify the linked list with
         // the correct next item (without the deleted one)
-        var previous: Link<T>? = getFirst()
+        var previous: Linkeable<T>? = getFirst()
 
         while (previous?.getNext() != null) {
             // current item to be tested
-            val link = previous.getNext() as Link<T>
+            val link = previous.getNext() as Linkeable<T>
             if (test(link)) {
                 if(link == _last){
                     _last = previous
                 }
                 // In this case we need to set the next value of the previous item to the correct link
-                previous.setNext(link.getNext() as Link<T>?)
+                previous.setNext(link.getNext() as Linkeable<T>?)
                 return link.getData()
             }
             previous = link
@@ -61,11 +61,11 @@ class DoubleLinkedList<T> : LinkedList<T>() {
 
         val link = getFirst()
         val newLink = link?.getNext()
-        setFirst(newLink as Link<T>)
+        setFirst(newLink as Linkeable<T>)
 
         return link.getData()
     }
-   override fun insertAfter(value: T, test: (Link<T>) -> Boolean): Boolean {
+   override fun insertAfter(value: T, test: (Linkeable<T>) -> Boolean): Boolean {
 
         val link = find(test) ?: return false
 
