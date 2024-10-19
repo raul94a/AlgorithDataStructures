@@ -27,11 +27,11 @@ public class HeapMain {
 
         ArrayList<Integer> list = new ArrayList() {{
             add(10);
-            add(3);
+            add(2);
             add(2);
             add(1);
             add(5);
-            add(9);
+            add(2);
             add(4);
         }};
 
