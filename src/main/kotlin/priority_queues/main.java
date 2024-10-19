@@ -1,5 +1,7 @@
 package priority_queues;
 
+import java.util.concurrent.ArrayBlockingQueue;
+
 public class main {
 
     public static void main(String[] args) {

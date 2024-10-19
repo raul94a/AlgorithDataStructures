@@ -33,6 +33,14 @@ public abstract class AbstractPriorityQueue<K, V>
         protected void setValue(V value) {
             v = value;
         }
+
+        @Override
+        public String toString() {
+            return "PQEntry{" +
+                    "k=" + k +
+                    ", v=" + v +
+                    '}';
+        }
     } //----------- end of nested PQEntry class -----------
 
     // instance variable for an AbstractPriorityQueue

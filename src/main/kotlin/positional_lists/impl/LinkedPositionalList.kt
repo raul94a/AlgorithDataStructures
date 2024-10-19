@@ -2,6 +2,7 @@ package positional_lists.impl
 
 import positional_lists.interfaces.Position
 import positional_lists.interfaces.PositionalList
+import java.util.concurrent.ArrayBlockingQueue
 
 class LinkedPositionalList<E>() : PositionalList<E> {
 
@@ -57,6 +58,7 @@ class LinkedPositionalList<E>() : PositionalList<E> {
         if (p !is Node<E>) {
             throw IllegalArgumentException("Not valid position")
         }
+        var e: ArrayBlockingQueue<Integer> = ArrayBlockingQueue(10)
         val node: Node<E> = p
         if (node.getElement() == null) {
             throw IllegalArgumentException("Node $p is not in the list")
