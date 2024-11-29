@@ -1,3 +1,5 @@
+import utils.Runneable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +17,9 @@ public class MainQuickSort {
             add(18);
         }};
         System.out.println(integers);
-        QuickSorter.quickSort(integers);
-
+        Runneable runneable = new Runneable();
+        runneable.run(()-> QuickSorter.quickSort(integers));
         System.out.println(integers);
+
     }
 }
