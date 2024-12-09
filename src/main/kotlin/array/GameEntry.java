@@ -1,5 +1,10 @@
 package array;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
+
 public class GameEntry {
 
     private String name;
@@ -8,6 +13,8 @@ public class GameEntry {
     public GameEntry(String name, int score) {
         this.name = name;
         this.score = score;
+
+
     }
 
     @Override
