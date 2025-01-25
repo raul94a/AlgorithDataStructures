@@ -89,5 +89,8 @@ public class HashTable<K extends Serializable,V> {
             hashTable.insert(uuid, i);
         }
         System.out.println(hashTable);
+        System.out.println(hashTable.get("HOLA"));
+        hashTable.delete("HOLA");
+        System.out.println(hashTable);
     }
 }
