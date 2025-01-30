@@ -30,7 +30,7 @@ public class LinealExplorationExercise {
         carPlateHashTable.insert("CCC-6000","Alberto");
         carPlateHashTable.insert("CCC-6000","Alberto II");
         carPlateHashTable.insert("CCC-6000","Alberto III");
-        carPlateHashTable.insert("CCC-6000","Alberto III");
+        carPlateHashTable.insert("CCC-6000","Alberto IV");
 
 
 
