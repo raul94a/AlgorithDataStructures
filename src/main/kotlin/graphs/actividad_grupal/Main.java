@@ -53,7 +53,11 @@ public class Main {
         }
 
 
-        System.out.println(grafo);
+        var d = grafo.dijkstra("GIJÓN-2");
+        System.out.println(d);
+        System.out.println("\n\n");
+        var camino = grafo.dijkstra("AVILÉS-15", "GIJÓN-122");
+        System.out.println(camino);
 
     }
 
