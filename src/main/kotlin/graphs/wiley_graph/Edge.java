@@ -1,5 +1,7 @@
 package graphs.wiley_graph;
 
+import java.util.Arrays;
+
 public class Edge<V> {
 
     private Vertex[] edge;
@@ -39,5 +41,11 @@ public class Edge<V> {
 
     public void setWeight(Double weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        var eps = getEdge();
+        return eps[0] + "->" + eps[1];
     }
 }

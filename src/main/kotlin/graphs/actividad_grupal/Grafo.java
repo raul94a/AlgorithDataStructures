@@ -270,6 +270,7 @@ public class Grafo {
     public List<String> dijkstra(String clave1, String clave2) {
 
         List<Double> d = this.dijkstra(clave1);
+        System.out.println("camino:  " + d);
         ArrayList<String> adyacencia;
         int indiceActual, indiceAdyacente;
         String actual;
@@ -282,7 +283,7 @@ public class Grafo {
 
         camino.add(clave2);
         actual = clave2;
-
+        double total = 0;
         while (!actual.equals(clave1)) {
             adyacencia = adyacenciaNodo(actual);
             for (String nodoCamino : camino) {
@@ -291,14 +292,18 @@ public class Grafo {
             indiceActual = claves.indexOf(actual);
             for (String nodoAdyacente : adyacencia) {
                 indiceAdyacente = claves.indexOf(nodoAdyacente);
+
                 double costeCamino = d.get(indiceAdyacente) + matriz[indiceActual][indiceAdyacente];
                 if (d.get(indiceActual) == costeCamino) {
+                    System.out.println("Para nodo " + nodoAdyacente  +  " "  + matriz[indiceActual][indiceAdyacente]);
+                    total += matriz[indiceActual][indiceAdyacente];
                     camino.addFirst(nodoAdyacente);
                     actual = nodoAdyacente;
                     break;
                 }
             }
         }
+        System.out.println("El camino total recorrido es de " + total);
         return camino;
     }
 

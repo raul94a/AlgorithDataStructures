@@ -2,6 +2,7 @@ package priority_queues;
 
 import java.util.ArrayList;
 
+
 public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
     ArrayList<Entry<K, V>> heap = new ArrayList<>();
     public HeapPriorityQueue() {}
@@ -14,6 +15,8 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
             heap.add(new PQEntry<>(keys[j], values[j]));
         heapify();
     }
+
+
 
     /**
      * Performs a bottom-up construction of the heap in linear time.
@@ -145,6 +148,7 @@ public class HeapPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
             j = smallPriorityChildIndex;
         }
     }
+
 
 
 }

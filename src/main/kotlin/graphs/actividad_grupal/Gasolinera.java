@@ -18,8 +18,9 @@ public class Gasolinera implements NodoGrafo{
 
     @Override
     public String toString() {
-        return "[clave=" + clave + ", rotulo=" + rotulo + ", direccion=" + direccion + ", municipio="
-                + municipio + ", localidad=" + localidad + "]";
+        return clave;
+//        return "(clave=" + clave + ", rotulo=" + rotulo + ", direccion=" + direccion + ", municipio="
+//                + municipio + ", localidad=" + localidad + ")";
     }
 
 
